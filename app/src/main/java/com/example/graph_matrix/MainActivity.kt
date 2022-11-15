@@ -41,22 +41,5 @@ class MainActivity : AppCompatActivity() {
         g.connect("B", "C")
         println(g.neighbors("B"))
     }
-    fun bfs(start: String, finish: String) = bfs(this[start], this[finish])
 
-    private fun bfs(start: Vertex, finish: Vertex): Int {
-        val queue = ArrayDeque<Vertex>()
-        queue.add(start)
-        val visited = mutableMapOf(start to 0)
-        while (queue.isNotEmpty()) {
-            val next = queue.poll()
-            val distance = visited[next]!!
-            if (next == finish) return distance
-            for (neighbor in next.neighbors) {
-                if (neighbor in visited) continue
-                visited.put(neighbor, distance + 1)
-                queue.add(neighbor)
-            }
-        }
-        return -1
-    }
 }
