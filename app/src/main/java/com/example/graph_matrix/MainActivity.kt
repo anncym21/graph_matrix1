@@ -42,4 +42,20 @@ class MainActivity : AppCompatActivity() {
         println(g.neighbors("B"))
     }
 
+    fun createAdjacencyList(pairs: Array<IntArray>) {
+        val graph: HashMap<Int, MutableList<Int>> = hashMapOf()
+        pairs.forEach { pair ->
+            if (!graph.containsKey(pair[0])) {
+                // If the current node isn't in the adjacency list yet,
+                // add it and create its dependency list starting with
+                // pair[1]
+                graph[pair[0]] = mutableListOf(pair[1])
+            } else {
+                // Otherwise, append pair[1] to its existing dependency
+                // list.
+                val dependencies = graph[pair[0]]
+
+            }
+        }
+    }
 }
