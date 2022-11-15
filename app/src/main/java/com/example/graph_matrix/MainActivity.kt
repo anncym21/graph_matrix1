@@ -30,4 +30,33 @@ class MainActivity : AppCompatActivity() {
 
         fun neighbors(name: String) = vertices[name]?.neighbors?.map { it.name } ?: listOf()
     }
+    fun useGraph() {
+        val g = Graph()
+        g.addVertex("A")
+        g.addVertex("B")
+        g.addVertex("C")
+        g.addVertex("D")
+        g.connect("A", "C")
+        g.connect("B", "D")
+        g.connect("B", "C")
+        println(g.neighbors("B"))
+    }
+    fun bfs(start: String, finish: String) = bfs(this[start], this[finish])
+
+    private fun bfs(start: Vertex, finish: Vertex): Int {
+        val queue = ArrayDeque<Vertex>()
+        queue.add(start)
+        val visited = mutableMapOf(start to 0)
+        while (queue.isNotEmpty()) {
+            val next = queue.poll()
+            val distance = visited[next]!!
+            if (next == finish) return distance
+            for (neighbor in next.neighbors) {
+                if (neighbor in visited) continue
+                visited.put(neighbor, distance + 1)
+                queue.add(neighbor)
+            }
+        }
+        return -1
+    }
 }
